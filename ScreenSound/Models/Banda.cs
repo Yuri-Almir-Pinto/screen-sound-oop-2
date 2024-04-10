@@ -10,8 +10,8 @@ class Banda(string nome)
     public double Media => Notas.Average();
 
     public void Add(Album album) => Albuns.Add(album);
-
     public void Add(int nota) => Notas.Add(nota);
+    public void Add(List<int> notas) => notas.ForEach(Add);
 
     public void ExibirDiscografia()
     {

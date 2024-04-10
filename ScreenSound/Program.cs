@@ -1,13 +1,19 @@
-﻿namespace ScreenSound.main;
+﻿using ScreenSound.Models;
+
+namespace ScreenSound;
 
 class Program
 {
-    public static Dictionary<string, List<int>> bandasRegistradas = [];
+    public static List<Banda> bandasRegistradas = [];
     static void Main(string[] args)
     {
-        
-        bandasRegistradas.Add("Linkin Park", [10, 8, 6]);
-        bandasRegistradas.Add("The Beatles", []);
+        var linkinPark = new Banda("Linkin Park");
+        linkinPark.Add([10, 8, 7]);
+        var theBeatles = new Banda("The Beatles");
+        theBeatles.Add([10, 8, 7]);
+
+        bandasRegistradas.Add(linkinPark);
+        bandasRegistradas.Add(theBeatles);
 
         ExibirOpcoesDoMenu();
     }
@@ -89,7 +95,8 @@ class Program
         ExibirTituloDaOpcao("Registro das bandas");
         Console.Write("Digite o nome da banda que deseja registrar: ");
         string nomeDaBanda = Console.ReadLine()!;
-        bandasRegistradas.Add(nomeDaBanda, []);
+        var banda = new Banda(nomeDaBanda);
+        bandasRegistradas.Add(banda);
         Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso!");
         Thread.Sleep(4000);
         Console.Clear();
@@ -101,9 +108,9 @@ class Program
         Console.Clear();
         ExibirTituloDaOpcao("Exibindo todas as bandas registradas na nossa aplicação");
 
-        foreach (string banda in bandasRegistradas.Keys)
+        foreach (var banda in bandasRegistradas)
         {
-            Console.WriteLine($"Banda: {banda}");
+            Console.WriteLine($"Banda: {banda.Nome}");
         }
 
         Console.WriteLine("\nDigite uma tecla para voltar ao menu principal");
@@ -128,11 +135,12 @@ class Program
         ExibirTituloDaOpcao("Avaliar banda");
         Console.Write("Digite o nome da banda que deseja avaliar: ");
         string nomeDaBanda = Console.ReadLine()!;
-        if (bandasRegistradas.ContainsKey(nomeDaBanda))
+        var banda = FindBanda(nomeDaBanda);
+        if (banda is not null)
         {
             Console.Write($"Qual a nota que a banda {nomeDaBanda} merece: ");
             int nota = int.Parse(Console.ReadLine()!);
-            bandasRegistradas[nomeDaBanda].Add(nota);
+            banda.Add(nota);
             Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}");
             Thread.Sleep(2000);
             Console.Clear();
@@ -155,10 +163,10 @@ class Program
         ExibirTituloDaOpcao("Exibir detalhes da banda");
         Console.Write("Digite o nome da banda que deseja conhecer melhor: ");
         string nomeDaBanda = Console.ReadLine()!;
-        if (bandasRegistradas.ContainsKey(nomeDaBanda))
+        var banda = FindBanda(nomeDaBanda);
+        if (banda is not null)
         {
-            List<int> notasDaBanda = bandasRegistradas[nomeDaBanda];
-            Console.WriteLine($"\nA média da banda {nomeDaBanda} é {notasDaBanda.Average()}.");
+            Console.WriteLine($"\nA média da banda {nomeDaBanda} é {banda.Media}.");
             /**
             * ESPAÇO RESERVADO PARA COMPLETAR A FUNÇÃO
             */
@@ -177,4 +185,6 @@ class Program
             ExibirOpcoesDoMenu();
         }
     }
+
+    static Banda? FindBanda(string nome) => bandasRegistradas.Where(b => b.Nome.Equals(nome)).FirstOrDefault();
 }
