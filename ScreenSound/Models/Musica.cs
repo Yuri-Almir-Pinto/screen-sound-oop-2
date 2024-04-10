@@ -1,6 +1,6 @@
 ﻿namespace ScreenSound.Models;
 
-class Musica(Banda artista, string nome, int duracao)
+internal class Musica(Banda artista, string nome, int duracao)
 {
     public string Nome { get; } = nome;
     public int Duracao { get; set; } = duracao;

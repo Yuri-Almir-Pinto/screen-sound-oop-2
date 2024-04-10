@@ -4,8 +4,10 @@ namespace ScreenSound;
 
 class Program
 {
+
+    
     public static List<Banda> bandasRegistradas = [];
-    static void Main(string[] args)
+    static void Main()
     {
         var linkinPark = new Banda("Linkin Park");
         linkinPark.Add([10, 8, 7]);
@@ -139,9 +141,9 @@ class Program
         if (banda is not null)
         {
             Console.Write($"Qual a nota que a banda {nomeDaBanda} merece: ");
-            int nota = int.Parse(Console.ReadLine()!);
+            var nota = Avaliacao.Parse(Console.ReadLine()!);
             banda.Add(nota);
-            Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}");
+            Console.WriteLine($"\nA nota {nota.Nota} foi registrada com sucesso para a banda {nomeDaBanda}");
             Thread.Sleep(2000);
             Console.Clear();
             ExibirOpcoesDoMenu();
@@ -167,9 +169,6 @@ class Program
         if (banda is not null)
         {
             Console.WriteLine($"\nA média da banda {nomeDaBanda} é {banda.Media}.");
-            /**
-            * ESPAÇO RESERVADO PARA COMPLETAR A FUNÇÃO
-            */
             Console.WriteLine("Digite uma tecla para votar ao menu principal");
             Console.ReadKey();
             Console.Clear();

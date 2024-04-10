@@ -1,6 +1,6 @@
 ﻿namespace ScreenSound.Models;
 
-class Album(string nome)
+internal class Album(string nome)
 {
     public string Nome { get; } = nome;
 
