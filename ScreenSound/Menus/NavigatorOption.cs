@@ -1,6 +1,6 @@
 ﻿namespace ScreenSound.Menus;
 
-internal class SelectOption(string text, Menu handler)
+internal class NavigatorOption(string text, Menu handler)
 {
     public string Text { get; private set; } = text.Trim();
 
