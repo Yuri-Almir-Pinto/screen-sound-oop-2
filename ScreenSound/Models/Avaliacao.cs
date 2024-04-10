@@ -28,4 +28,9 @@ internal class Avaliacao(int nota)
         if (success) return new(nota);
         else throw new FormatException("Erro ao tentar converter a nota em texto para inteiro na avaliação.");
     }
+
+    public override string ToString()
+    {
+        return Convert.ToString(Nota);
+    }
 }

@@ -1,32 +1,19 @@
-﻿namespace ScreenSound.Models;
+﻿using ScreenSound.Models.Interfaces;
 
-internal class Musica(Banda artista, string nome, int duracao)
+namespace ScreenSound.Models;
+
+internal class Musica(Banda artista, string nome, int duracao, bool disponivel) : ISummary
 {
     public string Nome { get; } = nome;
     public int Duracao { get; set; } = duracao;
-    public bool? Disponivel { get; set; }
+    public bool Disponivel { get; set; } = disponivel;
 
     public Banda Artista { get; } = artista;
 
-    public string DescricaoResumida => $"A música {Nome} pertence à banda {Artista}";
-
-    public void ExibirFichaTecnica()
-    {
-        if (Disponivel is null)
-        {
-            Console.WriteLine("Propriedade disponível está nula.");
-            return;
-        }
-
-        Console.WriteLine($"Nome: {Nome}");
-        Console.WriteLine($"Artista: {Artista.Nome}");
-        Console.WriteLine($"Duração: {Duracao}");
-        if (Disponivel.Value)
-        {
-            Console.WriteLine("Disponível no plano.");
-        } else
-        {
-            Console.WriteLine("Adquira o plano Plus+");
-        }
-    }
+    public string AsList => $"- {Nome} | {Duracao} minutos (Feito por {Artista.Nome} - {(Disponivel ? "Disponível" : "Plus+")})";
+    public string Summary =>
+                            $@"Nome: {Nome}
+                            Artista: {Artista.Nome}
+                            Duração: {Duracao}
+                            {(Disponivel ? "Disponível no plano." : "Adquira o plano Plus+")}";
 }

@@ -1,6 +1,9 @@
-﻿namespace ScreenSound.Models;
+﻿using ScreenSound.Extensions;
+using ScreenSound.Models.Interfaces;
 
-internal class Banda(string nome)
+namespace ScreenSound.Models;
+
+internal class Banda(string nome) : ISummary
 {
     public string Nome { get; } = nome;
 
@@ -8,6 +11,13 @@ internal class Banda(string nome)
     public List<Avaliacao> Notas { get; } = [];
 
     public double Media => Notas.Average(n => n.Nota);
+    public string Summary => 
+                        $@"Nome: {Nome}
+                        Albuns:
+                        {Albuns.ConcatAsString(a => $"{a.AsList}\n")}
+
+                        Notas: {string.Join(", ", Notas)}.";
+    public string AsList => $"- {Nome} | Média: {Media}";
 
     public void Add(Album album) => Albuns.Add(album);
     public void Add(int nota) => Notas.Add(new(nota));

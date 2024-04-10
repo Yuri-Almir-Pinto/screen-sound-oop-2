@@ -1,4 +1,5 @@
-﻿using ScreenSound.Models;
+﻿using ScreenSound.Menus;
+using ScreenSound.Models;
 
 namespace ScreenSound;
 
@@ -17,60 +18,22 @@ class Program
         bandasRegistradas.Add(linkinPark);
         bandasRegistradas.Add(theBeatles);
 
-        ExibirOpcoesDoMenu();
-    }
+        var menu = new Select();
+        menu.Add("1", new("Registar uma banda", () => Utils.ScreenPrint(RegistrarBanda)));
+        menu.Add("2", new("Mostrar album da banda", () => Utils.ScreenPrint(RegistrarAlbum)));
+        menu.Add("3", new("Mostrar todas as bandas", () => Utils.ScreenPrint(MostrarBandasRegistradas)));
+        menu.Add("4", new("Avaliar uma banda", () => Utils.ScreenPrint(AvaliarUmaBanda)));
+        menu.Add("5", new("Exibir detalhes de uma banda", () => Utils.ScreenPrint(ExibirDetalhes)));
 
-    static void ExibirLogo()
-    {
-        Console.WriteLine(@"
-
-        ░██████╗░█████╗░██████╗░███████╗███████╗███╗░░██╗  ░██████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░
-        ██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝████╗░██║  ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗
-        ╚█████╗░██║░░╚═╝██████╔╝█████╗░░█████╗░░██╔██╗██║  ╚█████╗░██║░░██║██║░░░██║██╔██╗██║██║░░██║
-        ░╚═══██╗██║░░██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║  ░╚═══██╗██║░░██║██║░░░██║██║╚████║██║░░██║
-        ██████╔╝╚█████╔╝██║░░██║███████╗███████╗██║░╚███║  ██████╔╝╚█████╔╝╚██████╔╝██║░╚███║██████╔╝
-        ╚═════╝░░╚════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝  ╚═════╝░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░
-        ");
-        Console.WriteLine("Boas vindas ao Screen Sound 2.0!");
-    }
-
-    static void ExibirOpcoesDoMenu()
-    {
-        ExibirLogo();
-        Console.WriteLine("\nDigite 1 para registrar uma banda");
-        Console.WriteLine("Digite 2 para registrar o álbum de uma banda");
-        Console.WriteLine("Digite 3 para mostrar todas as bandas");
-        Console.WriteLine("Digite 4 para avaliar uma banda");
-        Console.WriteLine("Digite 5 para exibir os detalhes de uma banda");
-        Console.WriteLine("Digite -1 para sair");
-
-        Console.Write("\nDigite a sua opção: ");
-        string opcaoEscolhida = Console.ReadLine()!;
-        int opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
-
-        switch (opcaoEscolhidaNumerica)
+        while (true)
         {
-            case 1:
-                RegistrarBanda();
-                break;
-            case 2:
-                RegistrarAlbum();
-                break;
-            case 3:
-                MostrarBandasRegistradas();
-                break;
-            case 4:
-                AvaliarUmaBanda();
-                break;
-            case 5:
-                ExibirDetalhes();
-                break;
-            case -1:
-                Console.WriteLine("Tchau tchau :)");
-                break;
-            default:
-                Console.WriteLine("Opção inválida");
-                break;
+            Utils.ExibirLogo();
+            menu.PrintOptions();
+
+            Console.WriteLine("\nSelecione uma opção: ");
+
+            var input = Utils.GetStringInput();
+            menu.Choose(input);
         }
     }
 
