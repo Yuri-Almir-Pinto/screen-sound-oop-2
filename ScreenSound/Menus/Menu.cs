@@ -1,6 +1,9 @@
-﻿namespace ScreenSound.Menus;
-internal abstract class Menu
+﻿using ScreenSound.Models;
+
+namespace ScreenSound.Menus;
+internal abstract class Menu(List<Banda> data)
 {
+    public List<Banda> Data { get; } = data; 
     public void Logo()
     {
         Console.WriteLine(@"
@@ -14,6 +17,8 @@ internal abstract class Menu
         ");
         Console.WriteLine("Boas vindas ao Screen Sound 2.0!");
     }
+
+    public abstract void ExibirTitulo();
 
     public abstract void Execute();
 }

@@ -38,4 +38,13 @@ internal static class Utils
     {
         Console.ReadKey();
     }
+
+    public static void AsBanner(string titulo)
+    {
+        int quantidadeDeLetras = titulo.Length;
+        string asteriscos = string.Empty.PadLeft(quantidadeDeLetras, '*');
+        Console.WriteLine(asteriscos);
+        Console.WriteLine(titulo);
+        Console.WriteLine(asteriscos + "\n");
+    }
 }

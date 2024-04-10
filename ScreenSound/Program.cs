@@ -20,7 +20,7 @@ class Program
 
         var menu = new Navigator();
         menu.Add("1", new("Registar uma banda", () => Utils.ScreenPrint(RegistrarBanda)));
-        menu.Add("2", new("Mostrar album da banda", () => Utils.ScreenPrint(RegistrarAlbum)));
+        menu.Add("2", new("Registrar album da banda", () => Utils.ScreenPrint(RegistrarAlbum)));
         menu.Add("3", new("Mostrar todas as bandas", () => Utils.ScreenPrint(MostrarBandasRegistradas)));
         menu.Add("4", new("Avaliar uma banda", () => Utils.ScreenPrint(AvaliarUmaBanda)));
         menu.Add("5", new("Exibir detalhes de uma banda", () => Utils.ScreenPrint(ExibirDetalhes)));

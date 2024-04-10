@@ -9,6 +9,7 @@ internal class NavigatorOption(string text, Menu handler)
     public void Call() 
     {
         Console.Clear();
+        Handler.ExibirTitulo();
         Handler.Execute();
         Thread.Sleep(1500);
         Console.Clear();
