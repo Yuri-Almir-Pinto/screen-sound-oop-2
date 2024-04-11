@@ -6,8 +6,6 @@ namespace ScreenSound;
 
 class Program
 {
-
-    
     public static List<Banda> bandasRegistradas = [];
     static void Main()
     {
@@ -32,12 +30,21 @@ class Program
         while (run)
         {
             Menu.Logo();
+
             menu.PrintOptions();
 
             Console.WriteLine("\nSelecione uma opção: ");
 
             var input = Utils.GetStringInput();
-            menu.Choose(input);
+
+            var isValid = menu.Choose(input);
+
+            if (!isValid)
+            {
+                Console.WriteLine("Opção inválida.");
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
         }
     }
 
