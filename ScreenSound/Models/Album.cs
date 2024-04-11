@@ -3,7 +3,7 @@ using ScreenSound.Extensions;
 
 namespace ScreenSound.Models;
 
-internal class Album(string nome) : ISummary
+internal class Album(string nome) : ISummary, IAvaliavel
 {
     public string Nome { get; } = nome;
 
@@ -11,13 +11,18 @@ internal class Album(string nome) : ISummary
 
     public int DuracaoTotal => Musicas.Sum(m => m.Duracao);
 
-    public string AsList => $"- {Nome} | {DuracaoTotal} minutos.";
+    public string AsList => $"- {Nome} ({DuracaoTotal} minutos) | Nota: {string.Format("{0:0.0}", Media)} ";
     public string Summary => 
 $@"Album: {Nome}
 Duração total: {DuracaoTotal} minutos
 Musicas:
 {Musicas.ConcatAsString(m => $"{m.AsList}\n")}";
-    
+
+    public List<Avaliacao> Notas { get; } = [];
+
+    public double Media => Notas.Count > 0 ? Notas.Average(n => n.Nota) : 0;
+
+    public void Add(Avaliacao nota) => Notas.Add(nota);
 
     public void AdicionarMusica(Musica musica)
     {

@@ -24,7 +24,8 @@ class Program
         menu.Add("2", new("Registrar album da banda", new CadastrarAlbumBanda(bandasRegistradas)));
         menu.Add("3", new("Mostrar todas as bandas", new MostrarBandas(bandasRegistradas)));
         menu.Add("4", new("Avaliar uma banda", new AvaliarBanda(bandasRegistradas)));
-        menu.Add("5", new("Exibir detalhes de uma banda", new ExibirDetalhesBanda(bandasRegistradas)));
+        menu.Add("5", new("Avaliar um album", new AvaliarAlbum(bandasRegistradas)));
+        menu.Add("6", new("Exibir detalhes de uma banda", new ExibirDetalhesBanda(bandasRegistradas)));
         menu.Add("0", new("Sair", () => { run = false; }));
 
         while (run)
