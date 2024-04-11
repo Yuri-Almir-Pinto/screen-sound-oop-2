@@ -3,8 +3,10 @@
 namespace ScreenSound.Menus;
 internal abstract class Menu(List<Banda> data)
 {
-    public List<Banda> Data { get; } = data; 
-    public void Logo()
+    public List<Banda> Data { get; } = data;
+
+    public Banda? FindBanda(string nome) => Data.Where(b => b.Nome.Equals(nome)).FirstOrDefault();
+    public static void Logo()
     {
         Console.WriteLine(@"
 

@@ -13,10 +13,10 @@ internal class Album(string nome) : ISummary
 
     public string AsList => $"- {Nome} | {DuracaoTotal} minutos.";
     public string Summary => 
-                    $@"Album: {Nome}
-                    Duração total: {DuracaoTotal} minutos
-                    Musicas:
-                    {Musicas.ConcatAsString(m => $"{m.AsList}\n")}";
+$@"Album: {Nome}
+Duração total: {DuracaoTotal} minutos
+Musicas:
+{Musicas.ConcatAsString(m => $"{m.AsList}\n")}";
     
 
     public void AdicionarMusica(Musica musica)

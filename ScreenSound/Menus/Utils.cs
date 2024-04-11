@@ -34,8 +34,9 @@ internal static class Utils
         }
     }
 
-    public static void WaitActivity()
+    public static void WaitActivity(string waitText = "(Pressione qualquer tecla para voltar)")
     {
+        Console.WriteLine(waitText);
         Console.ReadKey();
     }
 

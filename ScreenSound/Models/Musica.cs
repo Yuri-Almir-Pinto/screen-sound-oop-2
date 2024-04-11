@@ -12,8 +12,8 @@ internal class Musica(Banda artista, string nome, int duracao, bool disponivel) 
 
     public string AsList => $"- {Nome} | {Duracao} minutos (Feito por {Artista.Nome} - {(Disponivel ? "Disponível" : "Plus+")})";
     public string Summary =>
-                            $@"Nome: {Nome}
-                            Artista: {Artista.Nome}
-                            Duração: {Duracao}
-                            {(Disponivel ? "Disponível no plano." : "Adquira o plano Plus+")}";
+$@"Nome: {Nome}
+Artista: {Artista.Nome}
+Duração: {Duracao}
+{(Disponivel ? "Disponível no plano." : "Adquira o plano Plus+")}";
 }

@@ -1,10 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ScreenSound.Models;
 
 namespace ScreenSound.Menus.Telas;
-internal class ExibirDetalhesBanda
+internal class ExibirDetalhesBanda(List<Banda> banda) : Menu(banda)
 {
+    public override void Execute()
+    {
+        Console.Write("Digite o nome da banda que deseja conhecer melhor: ");
+        string nomeDaBanda = Utils.GetStringInput();
+        var banda = FindBanda(nomeDaBanda);
+        if (banda is not null)
+        {
+            Console.WriteLine(banda.Summary);
+        }
+        else
+        {
+            Console.WriteLine("A banda não foi encontrada :<");
+        }
+    }
+
+    public override void ExibirTitulo()
+    {
+        Utils.AsBanner("Detalhes banda");
+    }
 }
